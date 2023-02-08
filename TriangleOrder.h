@@ -18,8 +18,8 @@ public:
 		return e + 3;
 	}
 
-	unsigned int size() {
-		return sizeof(TriangleOrder);
+	size_t size() {
+		return 3;
 	}
 };
 

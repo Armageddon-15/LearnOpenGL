@@ -78,3 +78,7 @@ void Geometry::use() {
 	glBindVertexArray(vao);
 }
 
+void Geometry::drawTriangle() {
+	glDrawElements(GL_TRIANGLES, order.size() * 3, GL_UNSIGNED_INT, 0);
+}
+

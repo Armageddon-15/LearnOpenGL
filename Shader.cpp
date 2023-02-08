@@ -27,7 +27,7 @@ void Shader::deleteShader() {
 	glDeleteShader(id);
 }
 
-bool Shader::checkShaderState() {
+bool Shader::checkState() {
 	int success;
 	glGetShaderiv(id, GL_COMPILE_STATUS, &success);
 	if (success) {

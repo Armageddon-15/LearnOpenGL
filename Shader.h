@@ -21,7 +21,7 @@ public:
 	void compileShader();
 	void deleteShader();
 
-	bool checkShaderState();
+	bool checkState();
 
 private:
 	void setShaderType(GLenum type);

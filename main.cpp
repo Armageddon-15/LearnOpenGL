@@ -89,15 +89,14 @@ void renderToWindow(GLFWwindow* window, ShaderProgram &sp, Geometry& g) {
         processInput(window);
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-
-        float time_v = glfwGetTime();
-        float green = sin(time_v) * 0.5f + 0.5f;
+        
+        float time_v = glfwGetTime(); 
 
         sp.useProgram();
-        sp.setUniform("color", green);
+        sp.setUniform("time", time_v);
 
         // glDrawArrays(GL_TRIANGLES, 0, 3);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        g.drawTriangle();
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
@@ -136,23 +135,21 @@ int main(){
     glGenBuffers(1, &vbo_id);
     glGenBuffers(1, &ebo_id);
 
-    glBindVertexArray(vao_id);
+    Geometry *g = new Geometry();
+    g->addVertex(Vertex(Vec3(-0.9f,  0.9f, 0.0f), Color3(1, 0, 0)));
+    g->addVertex(Vertex(Vec3(-0.9f, -0.9f, 0.0f), Color3(0, 1, 0)));
+    g->addVertex(Vertex(Vec3( 0.9f, -0.9f, 0.0f), Color3(0, 0, 1)));
+    g->addVertex(Vertex(Vec3( 0.9f,  0.9f, 0.0f), Color3(1, 1, 1)));
 
-    Geometry g;
-    g.addVertex(Vertex(Vec3(-0.9f,  0.9f, 0.0f), Color3(1, 0, 0)));
-    g.addVertex(Vertex(Vec3(-0.9f, -0.9f, 0.0f), Color3(0, 1, 0)));
-    g.addVertex(Vertex(Vec3( 0.9f, -0.9f, 0.0f), Color3(0, 0, 1)));
-    g.addVertex(Vertex(Vec3( 0.9f,  0.9f, 0.0f), Color3(0, 0, 1)));
+    g->addOrder(TriangleOrder(0, 1, 2));
+    g->addOrder(TriangleOrder(2, 3, 0));
 
-    g.addOrder(TriangleOrder(0, 1, 2));
-    g.addOrder(TriangleOrder(2, 3, 0));
+    g->bindVAO(vao_id);
+    g->bindVBO(vbo_id);
+    g->bindEBO(ebo_id);
+    g->setBufferData();
 
-    g.bindVAO(vao_id);
-    g.bindVBO(vbo_id);
-    g.bindEBO(ebo_id);
-    g.setBufferData();
-
-    renderToWindow(window, shader_program, g);
+    renderToWindow(window, shader_program, *g);
 
     // glfw: terminate, clearing all previously allocated GLFW resources.
     // ------------------------------------------------------------------

@@ -14,6 +14,4 @@ namespace OpenglHelper {
 
 }
 
-
-
 #endif // !OPENGLHELPER

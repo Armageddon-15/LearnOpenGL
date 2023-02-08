@@ -19,6 +19,7 @@ private:
 public:
 	GLuint getShaderProgramId();
 	void initShaderProgram();
+
 	void setVertexShader(const char* filename);
 	void setFragmentShader(const char* filename);
 	Shader* setShader(GLenum type, const char* filename);
@@ -31,6 +32,8 @@ public:
 
 	void linkProgram();
 	void useProgram();
+
+	bool checkState();
 	
 };
 

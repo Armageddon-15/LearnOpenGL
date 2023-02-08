@@ -22,7 +22,7 @@ void ShaderProgram::setFragmentShader(const char* filename) {
 
 Shader* ShaderProgram::setShader(GLenum type, const char* filename) {
 	Shader* shader = new Shader(type , filename);
-	if (shader->checkShaderState()) {
+	if (shader->checkState()) {
 		glAttachShader(id, shader->id);
 	}
 	shader->deleteShader();
@@ -52,4 +52,17 @@ void ShaderProgram::linkProgram() {
 
 void ShaderProgram::useProgram() {
 	glUseProgram(id);
+}
+
+bool ShaderProgram::checkState() {
+	int success;
+	glGetProgramiv(id, GL_COMPILE_STATUS, &success);
+	if (success) {
+		return true;
+	}
+
+	char log[512];
+	glGetProgramInfoLog(id, 512, NULL, log);
+	std::cout << log << "\n";
+	return false;
 }

@@ -30,6 +30,7 @@ public:
 	void bindEBO(GLuint& ebo);
 	void setBufferData();
 	void use();
+	void drawTriangle();
 	
 };
 

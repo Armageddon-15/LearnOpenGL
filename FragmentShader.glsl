@@ -1,8 +1,11 @@
 # version 450 core
+
+uniform float time;
+
+in vec3 vertex_color;
+
 out vec4 FragColor;
 
-uniform float color;
-
 void main(){
-	FragColor = vec4(1.0, color, 0.5, 1.0);
+	FragColor = vec4(vertex_color, 1.0) * (sin(time)*0.5+0.5);
 }
