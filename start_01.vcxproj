@@ -145,6 +145,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="stdImage.cpp" />
     <ClCompile Include="TriangleOrder.cpp" />
     <ClCompile Include="vec3.cpp" />
     <ClCompile Include="Vertex.cpp" />
