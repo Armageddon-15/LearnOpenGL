@@ -14,6 +14,7 @@ public:
 	Geometry() : max_vertex_count(0), vao(0) {};
 
 public:
+	void addVertex(Vertex& v);
 	void addVertex(Vertex v);
 	void deleteVertex(size_t pos);
 	void clearVertices();

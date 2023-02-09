@@ -1,9 +1,22 @@
 #include "Geometry.h"
 
-void Geometry::addVertex(Vertex v) {
+void Geometry::addVertex(Vertex& v) {
 	if (vertices.size() <= max_vertex_count) {
+		v.setIndex(max_vertex_count);
 		vertices.push_back(v);
 	} else {
+		v.setIndex(max_vertex_count);
+		vertices.at(max_vertex_count) = v;
+	}
+	max_vertex_count += 1;
+}
+
+void Geometry::addVertex(Vertex v) {
+	if (vertices.size() <= max_vertex_count) {
+		v.setIndex(max_vertex_count);
+		vertices.push_back(v);
+	} else {
+		v.setIndex(max_vertex_count);
 		vertices.at(max_vertex_count) = v;
 	}
 	max_vertex_count += 1;

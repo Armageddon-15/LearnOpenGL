@@ -43,7 +43,7 @@ class Vec3
 			return e + 3;
 		}
 
-		double size() {
+		size_t size() {
 			return sizeof(Vec3);
 		}
 

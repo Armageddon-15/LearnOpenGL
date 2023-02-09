@@ -136,10 +136,10 @@ int main(){
     glGenBuffers(1, &ebo_id);
 
     Geometry *g = new Geometry();
-    g->addVertex(Vertex(Vec3(-0.9f,  0.9f, 0.0f), Color3(1, 0, 0)));
-    g->addVertex(Vertex(Vec3(-0.9f, -0.9f, 0.0f), Color3(0, 1, 0)));
-    g->addVertex(Vertex(Vec3( 0.9f, -0.9f, 0.0f), Color3(0, 0, 1)));
-    g->addVertex(Vertex(Vec3( 0.9f,  0.9f, 0.0f), Color3(1, 1, 1)));
+    g->addVertex(Vertex(Vec3(-0.9f,  0.9f, 0.0f), Color3(1, 0, 0), Vec2(1,0)));
+    g->addVertex(Vertex(Vec3(-0.9f, -0.9f, 0.0f), Color3(0, 1, 0), Vec2(0,0)));
+    g->addVertex(Vertex(Vec3( 0.9f, -0.9f, 0.0f), Color3(0, 0, 1), Vec2(1,0)));
+    g->addVertex(Vertex(Vec3( 0.9f,  0.9f, 0.0f), Color3(1, 1, 1), Vec2(1,1)));
 
     g->addOrder(TriangleOrder(0, 1, 2));
     g->addOrder(TriangleOrder(2, 3, 0));

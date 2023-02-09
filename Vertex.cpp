@@ -22,3 +22,7 @@ std::vector<double> Vertex::array() {
 size_t Vertex::dataSize() {
     return sizeof(pos) + sizeof(color);
 }
+
+void Vertex::setUV0(Vec2 uv) {
+    uv0 = uv;
+}
