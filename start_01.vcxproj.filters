@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="资源文件\GLSL">
+      <UniqueIdentifier>{317ae3de-9d69-4ae3-9a74-5683385a72ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -39,14 +42,6 @@
     <ClCompile Include="TriangleOrder.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="VertexShader.glsl">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="FragmentShader.glsl">
-      <Filter>资源文件</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StringHepler.h">
@@ -79,5 +74,19 @@
     <ClInclude Include="vec2.h">
       <Filter>头文件</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GLSL\shader_part.frag">
+      <Filter>资源文件\GLSL</Filter>
+    </None>
+    <None Include="GLSL\shader_part.vert">
+      <Filter>资源文件\GLSL</Filter>
+    </None>
+    <None Include="GLSL\texture_part.vert">
+      <Filter>资源文件\GLSL</Filter>
+    </None>
+    <None Include="GLSL\texture_part.frag">
+      <Filter>资源文件\GLSL</Filter>
+    </None>
   </ItemGroup>
 </Project>

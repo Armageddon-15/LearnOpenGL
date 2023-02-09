@@ -150,10 +150,6 @@
     <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FragmentShader.glsl" />
-    <None Include="VertexShader.glsl" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="OpenGLHepler.h" />
     <ClInclude Include="Shader.h" />
@@ -164,6 +160,12 @@
     <ClInclude Include="vec2.h" />
     <ClInclude Include="vec3.h" />
     <ClInclude Include="Vertex.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GLSL\shader_part.frag" />
+    <None Include="GLSL\shader_part.vert" />
+    <None Include="GLSL\texture_part.frag" />
+    <None Include="GLSL\texture_part.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
