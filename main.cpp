@@ -1,5 +1,6 @@
 #include <vector>
 
+#include "stb_image.h"
 #include "OpenGLHepler.h"
 #include "toolFunctions.h"
 #include "ShaderProgram.h"
@@ -27,9 +28,11 @@ void framebufferSizeCallback(GLFWwindow *window, int width, int height){
     glViewport(0, 0, width, height);
 }
 
-// glfw: initialize and configure
+// Initialize and Create a window
 // ------------------------------
 GLFWwindow* initOpenGL() {
+    // glfw: initialize and configure
+    // ------------------------------
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
@@ -93,6 +96,9 @@ void renderToWindow(GLFWwindow* window, ShaderProgram &sp, Geometry& g) {
         float time_v = glfwGetTime(); 
 
         sp.useProgram();
+        sp.setUniform("base_color", 0);
+        sp.setUniform("add_layer", 1);
+
         sp.setUniform("time", time_v);
 
         // glDrawArrays(GL_TRIANGLES, 0, 3);
@@ -126,8 +132,8 @@ int main(){
     }
 
     ShaderProgram shader_program;
-    shader_program.setVertexShader("VertexShader.glsl");
-    shader_program.setFragmentShader("FragmentShader.glsl");
+    shader_program.setVertexShader("GLSL/texture_part.vert");
+    shader_program.setFragmentShader("GLSL/texture_part.frag");
     shader_program.linkProgram();
 
     unsigned int vbo_id, vao_id, ebo_id;
@@ -136,7 +142,7 @@ int main(){
     glGenBuffers(1, &ebo_id);
 
     Geometry *g = new Geometry();
-    g->addVertex(Vertex(Vec3(-0.9f,  0.9f, 0.0f), Color3(1, 0, 0), Vec2(1,0)));
+    g->addVertex(Vertex(Vec3(-0.9f,  0.9f, 0.0f), Color3(1, 0, 0), Vec2(0,1)));
     g->addVertex(Vertex(Vec3(-0.9f, -0.9f, 0.0f), Color3(0, 1, 0), Vec2(0,0)));
     g->addVertex(Vertex(Vec3( 0.9f, -0.9f, 0.0f), Color3(0, 0, 1), Vec2(1,0)));
     g->addVertex(Vertex(Vec3( 0.9f,  0.9f, 0.0f), Color3(1, 1, 1), Vec2(1,1)));
@@ -149,6 +155,55 @@ int main(){
     g->bindEBO(ebo_id);
     g->setBufferData();
 
+    GLuint texture_id, texture_id2;
+    glGenTextures(1, &texture_id);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture_id);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    stbi_set_flip_vertically_on_load(true);
+
+    int width, height, n_ch;
+    GLubyte* data = stbi_load("../resources/textures/container.jpg", &width, &height, &n_ch, 0);
+
+    std::vector<GLubyte> s(data, data+(height*width*n_ch)) ;
+
+    if (data) {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, s.data());
+        glGenerateMipmap(GL_TEXTURE_2D);
+    } else {
+        std::cout << "Failed to load image" << "\n";
+    }
+
+    stbi_image_free(data);
+
+    glGenTextures(1, &texture_id2);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, texture_id2);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    GLubyte* data2 = stbi_load("../resources/textures/awesomeface.png", &width, &height, &n_ch, 0);
+
+    std::vector<GLubyte> s2(data2, data2 + (height * width * n_ch));
+
+    if (data2) {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, s2.data());
+        glGenerateMipmap(GL_TEXTURE_2D);
+    } else {
+        std::cout << "Failed to load image" << "\n";
+    }
+
+    stbi_image_free(data2);
+
+    // glBindTexture(GL_TEXTURE_2D, texture_id);
     renderToWindow(window, shader_program, *g);
 
     // glfw: terminate, clearing all previously allocated GLFW resources.

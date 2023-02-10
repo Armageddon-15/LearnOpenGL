@@ -81,10 +81,14 @@ void Geometry::bindEBO(GLuint& ebo) {
 }
 
 void Geometry::setBufferData() {
-	glVertexAttribPointer(0, 3, GL_DOUBLE, GL_FALSE, 2*sizeof(Vec3), 0);
+	size_t data_length = 2 * sizeof(Vec3) + sizeof(Vec2);
+	glVertexAttribPointer(0, 3, GL_DOUBLE, GL_FALSE, data_length, 0);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_DOUBLE, GL_FALSE, 2*sizeof(Vec3), (void*)sizeof(Vec3));
+	glVertexAttribPointer(1, 3, GL_DOUBLE, GL_FALSE, data_length, (void*)sizeof(Vec3));
 	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 2, GL_DOUBLE, GL_FALSE, data_length, (void*)(2*sizeof(Vec3)));
+	glEnableVertexAttribArray(2);
+
 }
 
 void Geometry::use() {

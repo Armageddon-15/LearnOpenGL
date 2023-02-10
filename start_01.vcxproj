@@ -146,6 +146,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="stdImage.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TriangleOrder.cpp" />
     <ClCompile Include="vec3.cpp" />
     <ClCompile Include="Vertex.cpp" />
@@ -156,10 +157,12 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="StringHepler.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="toolFunctions.h" />
     <ClInclude Include="TriangleOrder.h" />
     <ClInclude Include="vec2.h" />
     <ClInclude Include="vec3.h" />
+    <ClInclude Include="vec3_template.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>

@@ -1,11 +1,11 @@
 #ifndef VERTEX
 #define VERTEX
+#include <vector>
 
 #include "OpenGLHepler.h"
 #include "vec3.h"
 #include "vec2.h"
 
-#include <vector>
 
 class Vertex
 {
@@ -28,5 +28,9 @@ public:
 	size_t dataSize();
 };
 
+	template <typename T, typename Ty>
+	inline void appendDataToVector(std::vector<T>& a, Ty& b) {
+		a.insert(a.end(), b.begin(), b.end());
+	}
 
 #endif // !VERTEX

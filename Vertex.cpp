@@ -14,8 +14,9 @@ void Vertex::setIndex(unsigned int i) {
 
 std::vector<double> Vertex::array() {
     std::vector<double> data;
-    data.insert(data.end(), pos.begin(), pos.end());
-    data.insert(data.end(), color.begin(), color.end());
+    appendDataToVector(data, pos);
+    appendDataToVector(data, color);
+    appendDataToVector(data, uv0);
     return data;
 }
 

@@ -45,22 +45,16 @@
     <ClCompile Include="stdImage.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="StringHepler.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
     <ClInclude Include="ShaderProgram.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="toolFunctions.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGLHepler.h">
-      <Filter>源文件</Filter>
     </ClInclude>
     <ClInclude Include="Vertex.h">
       <Filter>头文件</Filter>
@@ -75,6 +69,21 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="vec2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="toolFunctions.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="StringHepler.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLHepler.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="vec3_template.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
