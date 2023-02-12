@@ -13,11 +13,13 @@ void ShaderProgram::initShaderProgram() {
 }
 
 void ShaderProgram::setVertexShader(const char* filename) {
-	setShader(GL_VERTEX_SHADER, filename);
+	Shader* s = setShader(GL_VERTEX_SHADER, filename);
+	free(s);
 }
 
 void ShaderProgram::setFragmentShader(const char* filename) {
-	setShader(GL_FRAGMENT_SHADER, filename);
+	Shader* s = setShader(GL_FRAGMENT_SHADER, filename);
+	free(s);
 }
 
 Shader* ShaderProgram::setShader(GLenum type, const char* filename) {
