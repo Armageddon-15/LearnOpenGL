@@ -17,12 +17,15 @@ public:
 	Texture(const char* filename);
 
 public:
+	// only support rgb, rgba and grayscale
 	void setTexture(const char* filename);
+
 	void setTextureParameter(GLenum pname, GLint param);
 	void setTextureParameter(GLenum pname, GLfloat param);
 	void setTextureParameter(GLenum pname, const GLint* param);
 	void setTextureParameter(GLenum pname, const GLfloat* param);
 
+	void active();
 
 private:
 

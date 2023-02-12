@@ -5,6 +5,7 @@
 #include "toolFunctions.h"
 #include "ShaderProgram.h"
 #include "Geometry.h"
+#include "Texture.h"
 
 void framebufferSizeCallback(GLFWwindow *window, int width, int height);
 void processInput(GLFWwindow *window);
@@ -155,55 +156,21 @@ int main(){
     g->bindEBO(ebo_id);
     g->setBufferData();
 
-    GLuint texture_id, texture_id2;
-    glGenTextures(1, &texture_id);
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, texture_id);
+    Texture tex01("../resources/textures/container.jpg");
+    tex01.setTextureParameter(GL_TEXTURE_WRAP_S, GL_REPEAT);
+    tex01.setTextureParameter(GL_TEXTURE_WRAP_T, GL_REPEAT);
+    tex01.setTextureParameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    tex01.setTextureParameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    Texture tex02("../resources/textures/awesomeface.png");
+    tex02.setTextureParameter(GL_TEXTURE_WRAP_S, GL_REPEAT);
+    tex02.setTextureParameter(GL_TEXTURE_WRAP_T, GL_REPEAT);
+    tex02.setTextureParameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    tex02.setTextureParameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    stbi_set_flip_vertically_on_load(true);
+    tex01.active();
+    tex02.active();
 
-    int width, height, n_ch;
-    GLubyte* data = stbi_load("../resources/textures/container.jpg", &width, &height, &n_ch, 0);
-
-    std::vector<GLubyte> s(data, data+(height*width*n_ch)) ;
-
-    if (data) {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, s.data());
-        glGenerateMipmap(GL_TEXTURE_2D);
-    } else {
-        std::cout << "Failed to load image" << "\n";
-    }
-
-    stbi_image_free(data);
-
-    glGenTextures(1, &texture_id2);
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, texture_id2);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    GLubyte* data2 = stbi_load("../resources/textures/awesomeface.png", &width, &height, &n_ch, 0);
-
-    std::vector<GLubyte> s2(data2, data2 + (height * width * n_ch));
-
-    if (data2) {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, s2.data());
-        glGenerateMipmap(GL_TEXTURE_2D);
-    } else {
-        std::cout << "Failed to load image" << "\n";
-    }
-
-    stbi_image_free(data2);
-
-    // glBindTexture(GL_TEXTURE_2D, texture_id);
     renderToWindow(window, shader_program, *g);
 
     // glfw: terminate, clearing all previously allocated GLFW resources.
